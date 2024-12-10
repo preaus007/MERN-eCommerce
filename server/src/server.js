@@ -4,27 +4,18 @@ const app = express();
 
 app.use(morgan("dev"));
 
+const isLoggedIn = (req, res, next) => {
+  console.log("Checking user authentication...");
+  next();
+};
+
+app.get("/api/profile", isLoggedIn, (req, res) => {
+  res.status(201).send(console.log("Showing user profile..."));
+});
+
 app.get("/test", (req, res) => {
   res.status(201).send({
     message: "Server is running fine...",
-  });
-});
-
-app.post("/test", (req, res) => {
-  res.status(201).send({
-    message: "POST: Server is running fine...",
-  });
-});
-
-app.put("/test", (req, res) => {
-  res.status(201).send({
-    message: "PUT: Server is running fine...",
-  });
-});
-
-app.delete("/test", (req, res) => {
-  res.status(201).send({
-    message: "DELETE: Server is running fine...",
   });
 });
 

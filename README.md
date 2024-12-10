@@ -53,3 +53,20 @@ app.delete("/test", (req, res) => {
   });
 });
 ```
+
+- Middleware - works between request and response
+
+```javascript
+const isLoggedIn = (req, res, next) => {
+  console.log("Some text");
+  next();
+};
+
+app.get("/api/profile", isLoggedIn, (req, res) => {
+  res.status(201).send({
+    message: "Showing user profile...",
+  });
+});
+```
+
+In that case, before showing user profile, it will check is user logged in.

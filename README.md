@@ -69,4 +69,17 @@ app.get("/api/profile", isLoggedIn, (req, res) => {
 });
 ```
 
-In that case, before showing user profile, it will check is user logged in.
+In that case, before showing user profile, it will check is user logged in. </br> We can also use logical conditions in the middleware
+
+```javascript
+const isLoggedIn = (req, res, next) => {
+  const flag = false;
+  if (flag) {
+    next();
+  } else {
+    return res.status(401).json({
+      message: "Log in first...",
+    });
+  }
+};
+```

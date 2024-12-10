@@ -5,12 +5,20 @@ const app = express();
 app.use(morgan("dev"));
 
 const isLoggedIn = (req, res, next) => {
-  console.log("Checking user authentication...");
-  next();
+  const flag = false;
+  if (flag) {
+    next();
+  } else {
+    return res.status(401).json({
+      message: "Log in first...",
+    });
+  }
 };
 
 app.get("/api/profile", isLoggedIn, (req, res) => {
-  res.status(201).send(console.log("Showing user profile..."));
+  res.status(201).send({
+    message: "Showing user profile...",
+  });
 });
 
 app.get("/test", (req, res) => {
